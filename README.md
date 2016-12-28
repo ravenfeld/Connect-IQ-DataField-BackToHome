@@ -1,5 +1,5 @@
 # Connect-IQ-DataField-BackToHome
-Datafield for your Orientation Course
+Datafield for back to home
 
 Indicates the distance and direction to be taken from the starting point of your activity or intermediate point according to your configuration
 
