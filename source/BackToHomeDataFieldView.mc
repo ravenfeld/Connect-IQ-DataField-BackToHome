@@ -110,14 +110,14 @@ class BackToHomeDataFieldView extends Ui.DataField
 			
             if( display_logo_orientation ){
             	if( orientation != null ){
-					drawLogoOrientation(dc, center_x, center_y, size_max, -orientation);
+					drawLogoOrientation(dc, center_x, center_y, size_max, -orientation+heading_rad);
 				}else{
 					drawLogoOrientation(dc, center_x, center_y, size_max, heading_rad);
 				}
 			}
 			
 			if( orientation !=null ){
-				drawTextOrientation(dc, center_x, center_y, size_max, orientation);
+				drawTextOrientation(dc, center_x, center_y - size_max/4+12, size_max, orientation-heading_rad);
 			}else{
 				drawTextOrientation(dc, center_x, center_y, size_max, heading_rad);
 			}
@@ -202,34 +202,38 @@ class BackToHomeDataFieldView extends Ui.DataField
 		
 		
 		dc.setColor(color, Graphics.COLOR_TRANSPARENT);
-		dc.drawText(center_x-step_text_metric, center_y+size/4-12, fontDist, distanceStr, Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
+		dc.drawText(center_x-step_text_metric, center_y, fontDist, distanceStr, Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
 		if( display_metric ){
-			dc.drawText(center_x+text_width_dist/2-step_text_metric, center_y+size/4-12+text_height_dist/4+2, fontMetric, metricStr, Graphics.TEXT_JUSTIFY_LEFT|Graphics.TEXT_JUSTIFY_VCENTER);
+			dc.drawText(center_x+text_width_dist/2-step_text_metric, center_y+text_height_dist/4+2, fontMetric, metricStr, Graphics.TEXT_JUSTIFY_LEFT|Graphics.TEXT_JUSTIFY_VCENTER);
 		}
 	}
     
 	function drawTextOrientation(dc, center_x, center_y, size, orientation){
 		var color = getColor(App.getApp().getProperty("color_text_orientation"), getTextColor());
-		var fontDir;
+		var fontOrientaion;
 		var fontMetric = Graphics.FONT_TINY;
-		var dirStr=Lang.format("$1$", [(orientation*180/Math.PI).format("%d")]);
-       	
+
+       	if( orientation < 0 ) {
+				orientation = 2*Math.PI+orientation;
+		}
+		var orientationStr=Lang.format("$1$", [(orientation*180/Math.PI).format("%d")]);
+
 		var display_metric = false;
 		if(size >= SIZE_DATAFIELD_1) {
-			fontDir = Graphics.FONT_NUMBER_THAI_HOT ;
+			fontOrientaion = Graphics.FONT_NUMBER_THAI_HOT ;
 			display_metric=true;
 		}else if( size >= SIZE_DATAFIELD_2 ) {
-			fontDir = Graphics.FONT_NUMBER_MILD ;
+			fontOrientaion = Graphics.FONT_NUMBER_MILD ;
 		}else{
-			fontDir = Graphics.FONT_XTINY;
+			fontOrientaion = Graphics.FONT_XTINY;
 		}
 		
 		dc.setColor(color, Graphics.COLOR_TRANSPARENT);
-		dc.drawText(center_x, center_y-size/4+12, fontDir, dirStr, Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
+		dc.drawText(center_x, center_y, fontOrientaion, orientationStr, Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
 		if( display_metric ){
-			var text_width = dc.getTextWidthInPixels(dirStr, fontDir);
-			var text_height =dc.getFontHeight(fontDir);
-			dc.drawText(center_x+text_width/2+2, center_y-size/4+12-text_height/4+2, fontMetric, "o", Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
+			var text_width = dc.getTextWidthInPixels(orientationStr, fontOrientaion);
+			var text_height =dc.getFontHeight(fontOrientaion);
+			dc.drawText(center_x+text_width/2+2, center_y-text_height/4+2, fontMetric, "o", Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
 		}
 	}
         
