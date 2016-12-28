@@ -4,13 +4,13 @@ using Toybox.Application as App;
 using Toybox.Graphics as Gfx;
 using Toybox.Math;
 
-class BackToHomeDataFieldView extends Ui.DataField{   
-    hidden var SIZE_DATAFIELD_1= 218;
-    hidden var SIZE_DATAFIELD_2=108;
-    hidden var SIZE_DATAFIELD_3=70; 
+class BackToHomeDataFieldView extends Ui.DataField
+{   
+    hidden var SIZE_DATAFIELD_1 = 218;
+    hidden var SIZE_DATAFIELD_2 = 108;
+    hidden var SIZE_DATAFIELD_3 = 70;
+    hidden var RAY_EARTH = 6378137; 
     hidden var heading_rad = null;
-    hidden var distance_start = 0;
-    hidden var distance_lap = 0; 
     hidden var isMetric = false;
     hidden var location_current = null;
     hidden var location_lap = null;
@@ -36,9 +36,7 @@ class BackToHomeDataFieldView extends Ui.DataField{
 		if( info.currentHeading != null ) {
 			heading_rad = info.currentHeading;
 		}
-		distance_start = info.elapsedDistance;
 		location_current = info.currentLocation;
-		location_lap = info.startLocation;
 	}
     
     function onLayout(dc) {
@@ -83,6 +81,7 @@ class BackToHomeDataFieldView extends Ui.DataField{
 			}
             				
 			var orientation = null;	
+			var distance = null;
 			if( location_current !=null && location_lap != null ) {
 				var	latitude_point_start;
 				var	longitude_point_start;
@@ -96,7 +95,7 @@ class BackToHomeDataFieldView extends Ui.DataField{
 				latitude_point_start = location_current.toRadians()[0];
 				longitude_point_start = location_current.toRadians()[1];
 					
-				var distance = Math.acos(Math.sin(latitude_point_start)*Math.sin(latitude_point_arrive) + Math.cos(latitude_point_start)*Math.cos(latitude_point_arrive)*Math.cos(longitude_point_start-longitude_point_arrive));
+				distance = Math.acos(Math.sin(latitude_point_start)*Math.sin(latitude_point_arrive) + Math.cos(latitude_point_start)*Math.cos(latitude_point_arrive)*Math.cos(longitude_point_start-longitude_point_arrive));
     		
 				if( distance > 0) {
 					orientation = Math.acos((Math.sin(latitude_point_arrive)-Math.sin(latitude_point_start)*Math.cos(distance))/(Math.sin(distance)*Math.cos(latitude_point_start)));
@@ -111,26 +110,20 @@ class BackToHomeDataFieldView extends Ui.DataField{
 			
             if( display_logo_orientation ){
             	if( orientation != null ){
-					drawLogoOrientation(dc, center_x, center_y, size_max, -orientation);
+					drawLogoOrientation(dc, center_x, center_y, size_max, -orientation+heading_rad);
 				}else{
 					drawLogoOrientation(dc, center_x, center_y, size_max, heading_rad);
 				}
 			}
 			
 			if( orientation !=null ){
-				drawTextOrientation(dc, center_x, center_y, size_max, orientation);
+				drawTextOrientation(dc, center_x, center_y - size_max/4+12, size_max, orientation-heading_rad);
 			}else{
 				drawTextOrientation(dc, center_x, center_y, size_max, heading_rad);
 			}
 
-			if( distance_start != null ) {   
-				if( distance_lap != null) { 
-					drawTextDistance(dc, center_x, center_y, size_max, distance_start-distance_lap);
-				}else{
-					drawTextDistance(dc, center_x, center_y, size_max, distance_start);
-				}
-			}else{
-				drawTextDistance(dc, center_x, center_y, size_max, 0);
+			if( distance != null && distance > 0) {   
+				drawTextDistance(dc, center_x, center_y + size_max/4-12, size_max, distance*RAY_EARTH);
 			}
 
 			var display_compass = App.getApp().getProperty("display_compass");
@@ -139,10 +132,13 @@ class BackToHomeDataFieldView extends Ui.DataField{
 			}
 		}
 	}
+    
+    function onTimerStart(){
+    	location_lap=location_current;
+    }
                 
 	function onTimerLap(){
 		if( App.getApp().getProperty("return_lap_location") ) {
-			distance_lap=distance_start;
 			location_lap=location_current;
 		}               
 	}        
@@ -206,34 +202,38 @@ class BackToHomeDataFieldView extends Ui.DataField{
 		
 		
 		dc.setColor(color, Graphics.COLOR_TRANSPARENT);
-		dc.drawText(center_x-step_text_metric, center_y+size/4-12, fontDist, distanceStr, Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
+		dc.drawText(center_x-step_text_metric, center_y, fontDist, distanceStr, Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
 		if( display_metric ){
-			dc.drawText(center_x+text_width_dist/2-step_text_metric, center_y+size/4-12+text_height_dist/4+2, fontMetric, metricStr, Graphics.TEXT_JUSTIFY_LEFT|Graphics.TEXT_JUSTIFY_VCENTER);
+			dc.drawText(center_x+text_width_dist/2-step_text_metric, center_y+text_height_dist/4+2, fontMetric, metricStr, Graphics.TEXT_JUSTIFY_LEFT|Graphics.TEXT_JUSTIFY_VCENTER);
 		}
 	}
     
 	function drawTextOrientation(dc, center_x, center_y, size, orientation){
 		var color = getColor(App.getApp().getProperty("color_text_orientation"), getTextColor());
-		var fontDir;
+		var fontOrientaion;
 		var fontMetric = Graphics.FONT_TINY;
-		var dirStr=Lang.format("$1$", [(orientation*180/Math.PI).format("%d")]);
-       	
+
+       	if( orientation < 0 ) {
+				orientation = 2*Math.PI+orientation;
+		}
+		var orientationStr=Lang.format("$1$", [(orientation*180/Math.PI).format("%d")]);
+
 		var display_metric = false;
 		if(size >= SIZE_DATAFIELD_1) {
-			fontDir = Graphics.FONT_NUMBER_THAI_HOT ;
+			fontOrientaion = Graphics.FONT_NUMBER_THAI_HOT ;
 			display_metric=true;
 		}else if( size >= SIZE_DATAFIELD_2 ) {
-			fontDir = Graphics.FONT_NUMBER_MILD ;
+			fontOrientaion = Graphics.FONT_NUMBER_MILD ;
 		}else{
-			fontDir = Graphics.FONT_XTINY;
+			fontOrientaion = Graphics.FONT_XTINY;
 		}
 		
 		dc.setColor(color, Graphics.COLOR_TRANSPARENT);
-		dc.drawText(center_x, center_y-size/4+12, fontDir, dirStr, Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
+		dc.drawText(center_x, center_y, fontOrientaion, orientationStr, Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
 		if( display_metric ){
-			var text_width = dc.getTextWidthInPixels(dirStr, fontDir);
-			var text_height =dc.getFontHeight(fontDir);
-			dc.drawText(center_x+text_width/2+2, center_y-size/4+12-text_height/4+2, fontMetric, "o", Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
+			var text_width = dc.getTextWidthInPixels(orientationStr, fontOrientaion);
+			var text_height =dc.getFontHeight(fontOrientaion);
+			dc.drawText(center_x+text_width/2+2, center_y-text_height/4+2, fontMetric, "o", Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
 		}
 	}
         
