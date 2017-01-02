@@ -37,6 +37,9 @@ class BackToHomeDataFieldView extends Ui.DataField
 			heading_rad = info.currentHeading;
 		}
 		location_current = info.currentLocation;
+		if( !App.getApp().getProperty("return_lap_location") ) {
+			location_lap = info.startLocation;
+		}
 	}
     
     function onLayout(dc) {
@@ -134,7 +137,9 @@ class BackToHomeDataFieldView extends Ui.DataField
 	}
     
     function onTimerStart(){
-    	location_lap=location_current;
+    	if( App.getApp().getProperty("return_lap_location") ) {
+    		location_lap=location_current;
+    	}
     }
                 
 	function onTimerLap(){
