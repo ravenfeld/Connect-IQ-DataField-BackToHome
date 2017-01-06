@@ -3,6 +3,8 @@
     
     <string id="display_logo_orientation_title">Display orientation logo</string>
     <string id="display_compass_title">Display compass</string>
+    <string id="display_text_distance_title">Display distance</string>
+    <string id="display_text_orientation_title">Display orientation</string>
     <string id="map_declination_title">Map declination</string>
     <string id="return_lap_location_title">Return lap location</string>
     <string id="color_text_compass_title">Color text of the compass</string>
