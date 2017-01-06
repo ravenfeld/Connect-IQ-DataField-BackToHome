@@ -4,7 +4,7 @@
     <string id="display_logo_orientation_title">Afficher la flèche d'orientation</string>
     <string id="display_compass_title">Afficher la boussole</string>
     <string id="display_text_distance_title">Afficher la distance</string>
-    <string id="display_text_orientation_title">Afficher l'azimute</string>
+    <string id="display_text_orientation_title">Afficher l'azimut</string>
     <string id="map_declination_title">Inclinaison de la carte</string>
     <string id="return_lap_location_title">Retourner au point d'intermédiaire</string>
     <string id="color_text_compass_title">Couleur du texte de la boussole</string>
