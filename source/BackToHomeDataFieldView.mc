@@ -109,9 +109,7 @@ class BackToHomeDataFieldView extends Ui.DataField
 				}
 			}
 			
-			var display_logo_orientation = App.getApp().getProperty("display_logo_orientation");
-			
-            if( display_logo_orientation ){
+            if( App.getApp().getProperty("display_logo_orientation") ){
             	if( orientation != null ){
 					drawLogoOrientation(dc, center_x, center_y, size_max, -orientation+heading_rad);
 				}else{
@@ -119,16 +117,29 @@ class BackToHomeDataFieldView extends Ui.DataField
 				}
 			}
 			
-			if( orientation !=null ){
-				drawTextOrientation(dc, center_x, center_y - size_max/4+12, size_max, orientation-heading_rad);
-			}else{
-				drawTextOrientation(dc, center_x, center_y, size_max, heading_rad);
+			var display_text_orientation = App.getApp().getProperty("display_text_orientation");
+			var display_text_distance = App.getApp().getProperty("display_text_distance");
+			
+			if( display_text_orientation ){
+				var y = center_y ;
+				if( display_text_distance && distance != null && distance > 0) {
+					y = center_y - size_max/4+12;
+				}
+				if( orientation !=null ){
+					drawTextOrientation(dc, center_x, y, size_max, orientation-heading_rad);
+				}else{
+					drawTextOrientation(dc, center_x, y, size_max, heading_rad);
+				}
 			}
 
-			if( distance != null && distance > 0) {   
-				drawTextDistance(dc, center_x, center_y + size_max/4-12, size_max, distance*RAY_EARTH);
+			if( display_text_distance && distance != null && distance > 0 ){
+				var y = center_y ;
+				if( display_text_orientation ) {
+					y = center_y + size_max/4-12;
+				}  
+				drawTextDistance(dc, center_x, y, size_max, distance*RAY_EARTH);
+				
 			}
-
 			var display_compass = App.getApp().getProperty("display_compass");
 			if( display_compass ){
 				drawCompass(dc, center_x, center_y, size_max);

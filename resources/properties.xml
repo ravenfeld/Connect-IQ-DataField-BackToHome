@@ -2,6 +2,8 @@
 	<properties> 
 		<property id="display_logo_orientation" type="boolean">true</property>
 		<property id="display_compass" type="boolean">true</property>
+		<property id="display_text_distance" type="boolean">true</property>
+		<property id="display_text_orientation" type="boolean">true</property>
 		<property id="map_declination" type="float">0.0</property>
 		<property id="return_lap_location" type="boolean">false</property>
 		<property id="color_text_compass" type="number">0</property> 
@@ -17,7 +19,13 @@
 		</setting>
 		<setting propertyKey="@Properties.display_compass" title="@Strings.display_compass_title" prompt="@Strings.display_compass_title">
 			<settingConfig type="boolean" />
+		</setting>
+		<setting propertyKey="@Properties.display_text_distance" title="@Strings.display_text_distance_title" prompt="@Strings.display_text_distance_title">
+			<settingConfig type="boolean" />
 		</setting> 
+		<setting propertyKey="@Properties.display_text_orientation" title="@Strings.display_text_orientation_title" prompt="@Strings.display_text_orientation_title">
+			<settingConfig type="boolean" />
+		</setting>  
 		<setting propertyKey="@Properties.map_declination" title="@Strings.map_declination_title" prompt="@Strings.map_declination_title">
 			<settingConfig type="numeric" />
 		</setting>
