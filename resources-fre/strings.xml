@@ -4,7 +4,7 @@
     <string id="display_logo_orientation_title">Afficher la flèche d'orientation</string>
     <string id="display_compass_title">Afficher la boussole</string>
     <string id="display_text_distance_title">Afficher la distance</string>
-    <string id="display_text_orientation_title">Afficher l'azimute</string>
+    <string id="display_text_orientation_title">Afficher l'azimut</string>
     <string id="map_declination_title">Inclinaison de la carte</string>
     <string id="return_lap_location_title">Retourner au point d'intermédiaire</string>
     <string id="color_text_compass_title">Couleur du texte de la boussole</string>
@@ -13,6 +13,8 @@
 	<string id="color_orientation_logo_title">Couleur de la flèche d'orientation</string>
 	<string id="color_text_orientation_title">Couleur du texte de l'orienation</string>
 	<string id="color_text_distance_title">Couleur du texte de la distance</string>
+	<string id="position_text_one_title">Position du texte (si une seul texte)</string>
+	
 	
 	<string id="color_default">Défaut</string>
     <string id="color_blue">Bleu</string>
@@ -30,4 +32,9 @@
     <string id="east">E</string>
     <string id="south">S</string>
     <string id="west">O</string>
+    
+    <string id="position_default">Défault</string>
+    <string id="position_top">Haut</string>
+    <string id="position_center">Centré</string>
+    <string id="position_bottom">Bas</string>  
 </strings>

@@ -13,6 +13,7 @@
 	<string id="color_orientation_logo_title">Color orientation logo</string>
 	<string id="color_text_orientation_title">Color text orientation</string>
 	<string id="color_text_distance_title">Color text distance</string>
+	<string id="position_text_one_title">Position text (if only one text)</string>
 	
   
     <string id="color_default">Default</string>
@@ -27,8 +28,14 @@
     <string id="color_purple">Purple</string>
     <string id="color_red">Red</string>
     <string id="color_red_dark">Red dark</string>
+    
     <string id="north">N</string>
     <string id="east">E</string>
     <string id="south">S</string>
     <string id="west">W</string>
+    
+    <string id="position_default">Default</string>
+    <string id="position_top">Top</string>
+    <string id="position_center">Center</string>
+    <string id="position_bottom">Bottom</string>    
 </strings>
