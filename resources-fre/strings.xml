@@ -13,6 +13,8 @@
 	<string id="color_orientation_logo_title">Couleur de la flèche d'orientation</string>
 	<string id="color_text_orientation_title">Couleur du texte de l'orienation</string>
 	<string id="color_text_distance_title">Couleur du texte de la distance</string>
+	<string id="position_text_one_title">Position du texte (si une seul texte)</string>
+	
 	
 	<string id="color_default">Défaut</string>
     <string id="color_blue">Bleu</string>
@@ -30,4 +32,9 @@
     <string id="east">E</string>
     <string id="south">S</string>
     <string id="west">O</string>
+    
+    <string id="position_default">Défault</string>
+    <string id="position_top">Haut</string>
+    <string id="position_center">Centré</string>
+    <string id="position_bottom">Bas</string>  
 </strings>

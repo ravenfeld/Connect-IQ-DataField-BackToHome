@@ -119,11 +119,19 @@ class BackToHomeDataFieldView extends Ui.DataField
 			
 			var display_text_orientation = App.getApp().getProperty("display_text_orientation");
 			var display_text_distance = App.getApp().getProperty("display_text_distance");
+			var position_text = App.getApp().getProperty("position_text_one");
+			
 			
 			if( display_text_orientation ){
 				var y = center_y ;
 				if( display_text_distance && distance != null && distance > 0) {
 					y = center_y - size_max/4+12;
+				}else if( position_text == 1 ){
+					y = center_y - size_max/4+12;
+				}else if( position_text == 2 ){
+					y = center_y;
+				}else if( position_text == 3 ){
+					y = center_y + size_max/4-22;
 				}
 				if( orientation !=null ){
 					drawTextOrientation(dc, center_x, y, size_max, orientation-heading_rad);
@@ -135,6 +143,12 @@ class BackToHomeDataFieldView extends Ui.DataField
 			if( display_text_distance && distance != null && distance > 0 ){
 				var y = center_y ;
 				if( display_text_orientation ) {
+					y = center_y + size_max/4-12;
+				}else if( position_text == 1 ){
+					y = center_y - size_max/4+2;
+				}else if( position_text == 2 ){
+					y = center_y;
+				}else if( position_text == 3 ){
 					y = center_y + size_max/4-12;
 				}  
 				drawTextDistance(dc, center_x, y, size_max, distance*RAY_EARTH);
