@@ -5,9 +5,11 @@
             <iq:product id="fenix5"/>
             <iq:product id="fenix5x"/>
             <iq:product id="fenix5s"/>
+            <iq:product id="vivoactive"/>
             <iq:product id="fenix3"/>
             <iq:product id="fenix3_hr"/>
             <iq:product id="fenixchronos"/>
+            <iq:product id="vivoactive_hr"/>
         </iq:products>
 
         <iq:permissions/>
