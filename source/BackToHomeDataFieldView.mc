@@ -76,6 +76,9 @@ class BackToHomeDataFieldView extends Ui.DataField
 		if( heading_rad != null) {
 			var map_declination =  App.getApp().getProperty("map_declination");
 			if (map_declination != null ) {	
+				if(map_declination instanceof Toybox.Lang.String) {
+					map_declination = map_declination.toFloat();
+				}
 				heading_rad= heading_rad+map_declination*Math.PI/180;
 			}
 			
