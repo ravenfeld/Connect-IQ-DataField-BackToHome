@@ -21,6 +21,11 @@ class BackToHomeDataFieldView extends Ui.DataField
     hidden var center_x;
 	hidden var center_y;
 	hidden var size_max;
+	hidden var gps_fixed_icon_white;
+	hidden var gps_not_fixed_icon_white;
+	hidden var gps_fixed_icon_black;
+	hidden var gps_not_fixed_icon_black;
+	hidden var gps;
 		
 	function initialize() {
 		isMetric = System.getDeviceSettings().distanceUnits == System.UNIT_METRIC;
@@ -29,6 +34,11 @@ class BackToHomeDataFieldView extends Ui.DataField
 		southStr = Ui.loadResource(Rez.Strings.south);
 		westStr = Ui.loadResource(Rez.Strings.west);
     
+    	gps_fixed_icon_white = Ui.loadResource(Rez.Drawables.GPSFixedIconWhite);
+		gps_not_fixed_icon_white = Ui.loadResource(Rez.Drawables.GPSNotFixedIconWhite);
+		gps_fixed_icon_black = Ui.loadResource(Rez.Drawables.GPSFixedIconBlack);
+		gps_not_fixed_icon_black = Ui.loadResource(Rez.Drawables.GPSNotFixedIconBlack);
+	
 		DataField.initialize();
 	}
     
@@ -40,6 +50,7 @@ class BackToHomeDataFieldView extends Ui.DataField
 		if( !App.getApp().getProperty("return_lap_location") ) {
 			location_lap = info.startLocation;
 		}
+		gps = info.currentLocationAccuracy;
 	}
     
     function onLayout(dc) {
@@ -160,6 +171,13 @@ class BackToHomeDataFieldView extends Ui.DataField
 			var display_compass = App.getApp().getProperty("display_compass");
 			if( display_compass ){
 				drawCompass(dc, center_x, center_y, size_max);
+			}
+			
+			var display_gps = App.getApp().getProperty("display_logo_gps");
+			if( display_gps ){
+				var x = center_x - center_x/2;
+				var y = center_y-center_y/2;
+				drawGPS(dc,x,y);
 			}
 		}
 	}
@@ -355,6 +373,26 @@ class BackToHomeDataFieldView extends Ui.DataField
 		var xy6 = pol2Cart(center_x, center_y, orientation+225*Math.PI/180, radius);
 		dc.fillPolygon([xy1, xy2, xy3, xy4, xy5, xy6]);
 	}
+    
+    function drawGPS(dc, center_x,center_y){
+    	var icon;
+    	var quality = App.getApp().getProperty("gps_quality");
+		if(getBackgroundColor() == Graphics.COLOR_BLACK){
+			if(gps!=null && gps>=quality){
+				icon = gps_fixed_icon_white;
+			}else{
+				icon = gps_not_fixed_icon_white;
+			}
+		}else{
+			if(gps!=null && gps>=quality){
+				icon = gps_fixed_icon_black;
+			}else{
+				icon = gps_not_fixed_icon_black;
+			}
+		}
+		dc.drawBitmap(center_x-icon.getWidth()/2,center_y-icon.getHeight()/2,icon);	
+	}
+    
     
 	function drawTextPolar(dc, center_x, center_y, radian, radius, font, text) {
 		var xy = pol2Cart(center_x, center_y, radian, radius);

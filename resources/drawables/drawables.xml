@@ -1,3 +1,23 @@
 <drawables>
     <bitmap id="LauncherIcon" filename="launcher_icon.png" />
+    <bitmap id="GPSFixedIconWhite" filename="gps_fixed_icon.png" dithering="none" >
+        <palette disableTransparency="false">
+            <color>FFFFFF</color>
+        </palette>
+    </bitmap>
+    <bitmap id="GPSFixedIconBlack" filename="gps_fixed_icon.png" dithering="none" >
+        <palette disableTransparency="false">
+            <color>000000</color>
+        </palette>
+    </bitmap>
+        <bitmap id="GPSNotFixedIconWhite" filename="gps_not_fixed_icon.png" dithering="none" >
+        <palette disableTransparency="false">
+            <color>FFFFFF</color>
+        </palette>
+    </bitmap>
+    <bitmap id="GPSNotFixedIconBlack" filename="gps_not_fixed_icon.png" dithering="none" >
+        <palette disableTransparency="false">
+            <color>000000</color>
+        </palette>
+    </bitmap>
 </drawables>
