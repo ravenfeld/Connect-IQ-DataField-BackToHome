@@ -5,6 +5,7 @@
     <string id="display_compass_title">Display compass</string>
     <string id="display_text_distance_title">Display distance</string>
     <string id="display_text_orientation_title">Display orientation</string>
+    <string id="display_logo_gps_title">Display quality gps</string>
     <string id="map_declination_title">Map declination</string>
     <string id="return_lap_location_title">Return lap location</string>
     <string id="color_text_compass_title">Color text of the compass</string>
@@ -14,6 +15,7 @@
 	<string id="color_text_orientation_title">Color text orientation</string>
 	<string id="color_text_distance_title">Color text distance</string>
 	<string id="position_text_one_title">Position text (if only one text)</string>
+	<string id="gps_quality_title">Quality level for gps</string>
 	
   
     <string id="color_default">Default</string>
@@ -38,4 +40,8 @@
     <string id="position_top">Top</string>
     <string id="position_center">Center</string>
     <string id="position_bottom">Bottom</string>    
+    
+    <string id="gps_poor">Poor</string>
+    <string id="gps_usable">Usable</string>  
+    <string id="gps_good">Good</string>      
 </strings>
