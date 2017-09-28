@@ -244,7 +244,7 @@ class BackToHomeDataFieldView extends Ui.DataField
 				}
 			}else{
 				metricStr="ft";
-				distanceStr=(distance/3.042).format("%d");
+				distanceStr=(distance*3.28084).format("%d");
 				if( display_metric ){
 					step_text_metric = dc.getTextWidthInPixels("t", fontMetric)/2;
 				}

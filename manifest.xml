@@ -11,6 +11,8 @@
             <iq:product id="fenix3_hr"/>
         </iq:products>
         <iq:permissions/>
-        <iq:languages/>
+        <iq:languages>
+            <iq:language>fre</iq:language>
+        </iq:languages>
     </iq:application>
 </iq:manifest>
