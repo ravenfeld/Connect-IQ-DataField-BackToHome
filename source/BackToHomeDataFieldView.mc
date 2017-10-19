@@ -175,8 +175,13 @@ class BackToHomeDataFieldView extends Ui.DataField
 			
 			var display_gps = App.getApp().getProperty("display_logo_gps");
 			if( display_gps ){
-				var x = center_x - center_x/2;
-				var y = center_y-center_y/2;
+				var x = center_x - size_max/4-4;
+				var y = center_y- size_max/4;
+				if(dc.getWidth() != dc.getHeight()){
+					x = 32;
+					y = 32;
+				} 
+				
 				drawGPS(dc,x,y);
 			}
 		}
