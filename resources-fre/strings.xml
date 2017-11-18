@@ -18,7 +18,7 @@
 	<string id="gps_quality_title">Qualité du signal gps</string>
 	
 	
-	<string id="color_default">Défaut</string>
+	<string id="default_title">Défaut</string>
     <string id="color_blue">Bleu</string>
     <string id="color_blue_dark">Bleu foncé</string>
     <string id="color_green">Vert</string>
@@ -35,12 +35,19 @@
     <string id="south">S</string>
     <string id="west">O</string>
     
-    <string id="position_default">Défault</string>
     <string id="position_top">Haut</string>
     <string id="position_center">Centré</string>
     <string id="position_bottom">Bas</string>  
     
     <string id="gps_poor">Faible</string>
     <string id="gps_usable">Correct</string>  
-    <string id="gps_good">Excellent</string>    
+    <string id="gps_good">Excellent</string> 
+    
+    <string id="orientation_size_title">Size text orientation</string>
+    <string id="distance_size_title">Size text distance</string> 
+    <string id="very_small">very small</string>
+    <string id="small">small</string>
+    <string id="normal">normal</string>
+    <string id="high">high</string>
+    <string id="very_high">very high</string>   
 </strings>

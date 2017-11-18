@@ -21,23 +21,10 @@ class BackToHomeDataFieldView extends Ui.DataField
     hidden var center_x;
 	hidden var center_y;
 	hidden var size_max;
-	hidden var gps_fixed_icon_white;
-	hidden var gps_not_fixed_icon_white;
-	hidden var gps_fixed_icon_black;
-	hidden var gps_not_fixed_icon_black;
 	hidden var gps;
 		
 	function initialize() {
 		isMetric = System.getDeviceSettings().distanceUnits == System.UNIT_METRIC;
-		northStr = Ui.loadResource(Rez.Strings.north);
-		eastStr = Ui.loadResource(Rez.Strings.east);
-		southStr = Ui.loadResource(Rez.Strings.south);
-		westStr = Ui.loadResource(Rez.Strings.west);
-    
-    	gps_fixed_icon_white = Ui.loadResource(Rez.Drawables.GPSFixedIconWhite);
-		gps_not_fixed_icon_white = Ui.loadResource(Rez.Drawables.GPSNotFixedIconWhite);
-		gps_fixed_icon_black = Ui.loadResource(Rez.Drawables.GPSFixedIconBlack);
-		gps_not_fixed_icon_black = Ui.loadResource(Rez.Drawables.GPSNotFixedIconBlack);
 	
 		DataField.initialize();
 	}
@@ -65,6 +52,7 @@ class BackToHomeDataFieldView extends Ui.DataField
 			||flag == OBSCURE_TOP|OBSCURE_LEFT){
 			size_max = size_max/1.25;
 		}
+		
 		if( dc.getWidth() == dc.getHeight() ) {
 			if( ( flag & OBSCURE_BOTTOM ) == OBSCURE_BOTTOM ) {
 				center_y = center_y-10;
@@ -79,6 +67,11 @@ class BackToHomeDataFieldView extends Ui.DataField
 				center_x = center_x+10;
 			}
 		}
+		
+		northStr = Ui.loadResource(Rez.Strings.north);
+		eastStr = Ui.loadResource(Rez.Strings.east);
+		southStr = Ui.loadResource(Rez.Strings.south);
+		westStr = Ui.loadResource(Rez.Strings.west);
     }
     
 	function onUpdate(dc) {           
@@ -256,6 +249,9 @@ class BackToHomeDataFieldView extends Ui.DataField
 			}
 		}
 		
+		var distance_size =  App.getApp().getProperty("distance_size");
+		fontDist = setSize(distance_size,fontDist);
+		
 		var text_width_dist = dc.getTextWidthInPixels(distanceStr, fontDist);
 		var text_height_dist = dc.getFontHeight(fontDist);
 		
@@ -265,6 +261,7 @@ class BackToHomeDataFieldView extends Ui.DataField
 		if( display_metric ){
 			dc.drawText(center_x+text_width_dist/2-step_text_metric, center_y+text_height_dist/4+2, fontMetric, metricStr, Graphics.TEXT_JUSTIFY_LEFT|Graphics.TEXT_JUSTIFY_VCENTER);
 		}
+
 	}
     
 	function drawTextOrientation(dc, center_x, center_y, size, orientation){
@@ -289,6 +286,10 @@ class BackToHomeDataFieldView extends Ui.DataField
 		}else{
 			fontOrientaion = Graphics.FONT_XTINY;
 		}
+		
+		var orientation_size =  App.getApp().getProperty("orientation_size");
+		
+		fontOrientaion=setSize(orientation_size,fontOrientaion);
 		
 		dc.setColor(color, Graphics.COLOR_TRANSPARENT);
 		dc.drawText(center_x, center_y, fontOrientaion, orientationStr, Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
@@ -384,15 +385,15 @@ class BackToHomeDataFieldView extends Ui.DataField
     	var quality = App.getApp().getProperty("gps_quality");
 		if(getBackgroundColor() == Graphics.COLOR_BLACK){
 			if(gps!=null && gps>=quality){
-				icon = gps_fixed_icon_white;
+				icon = Ui.loadResource(Rez.Drawables.GPSFixedIconWhite);
 			}else{
-				icon = gps_not_fixed_icon_white;
+				icon = Ui.loadResource(Rez.Drawables.GPSNotFixedIconWhite);
 			}
 		}else{
 			if(gps!=null && gps>=quality){
-				icon = gps_fixed_icon_black;
+				icon = Ui.loadResource(Rez.Drawables.GPSFixedIconBlack);
 			}else{
-				icon = gps_not_fixed_icon_black;
+				icon = Ui.loadResource(Rez.Drawables.GPSNotFixedIconBlack);
 			}
 		}
 		dc.drawBitmap(center_x-icon.getWidth()/2,center_y-icon.getHeight()/2,icon);	
@@ -442,5 +443,19 @@ class BackToHomeDataFieldView extends Ui.DataField
         
     function getTextColor(){
     	return (getBackgroundColor() == Graphics.COLOR_BLACK) ? Graphics.COLOR_WHITE : Graphics.COLOR_BLACK;
-    }    
+    }  
+    
+    function setSize(size, default_font){
+    	if(size==1){
+    		return Graphics.FONT_TINY;
+    	}else if(size==2){
+    		return Graphics.FONT_NUMBER_MILD;
+    	}else if(size==4){
+    		return Graphics.FONT_NUMBER_HOT;
+    	}else if(size==5){
+    		return Graphics.FONT_NUMBER_THAI_HOT;
+    	}else{
+    		return default_font;
+    	}
+    }
 }
