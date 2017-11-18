@@ -15,6 +15,8 @@
 		<property id="color_text_distance" type="number">0</property>
 		<property id="position_text_one" type="number">0</property>
 		<property id="gps_quality" type="number">0</property>
+		<property id="orientation_size" type="number">0</property>
+		<property id="distance_size" type="number">0</property>
 	</properties> 
 	<settings> 
 		<setting propertyKey="@Properties.display_logo_orientation" title="@Strings.display_logo_orientation_title" prompt="@Strings.display_logo_orientation_title"> 
@@ -37,7 +39,7 @@
 		</setting>  
 		<setting propertyKey="@Properties.color_text_compass" title="@Strings.color_text_compass_title" prompt="@Strings.color_text_compass_title">
 			<settingConfig type="list" >
-				<listEntry value="0">@Strings.color_default</listEntry>
+				<listEntry value="0">@Strings.default_title</listEntry>
 				<listEntry value="1">@Strings.color_blue</listEntry>
 				<listEntry value="2">@Strings.color_blue_dark</listEntry>
 				<listEntry value="3">@Strings.color_green</listEntry>
@@ -53,7 +55,7 @@
 		</setting>
 		<setting propertyKey="@Properties.color_text_north" title="@Strings.color_text_north_title" prompt="@Strings.color_text_north_title">
 			<settingConfig type="list" >
-				<listEntry value="0">@Strings.color_default</listEntry>
+				<listEntry value="0">@Strings.default_title</listEntry>
 				<listEntry value="1">@Strings.color_blue</listEntry>
 				<listEntry value="2">@Strings.color_blue_dark</listEntry>
 				<listEntry value="3">@Strings.color_green</listEntry>
@@ -69,7 +71,7 @@
 		</setting>
 		<setting propertyKey="@Properties.color_compass" title="@Strings.color_compass_title" prompt="@Strings.color_compass_title">
 			<settingConfig type="list" >
-				<listEntry value="0">@Strings.color_default</listEntry>
+				<listEntry value="0">@Strings.default_title</listEntry>
 				<listEntry value="1">@Strings.color_blue</listEntry>
 				<listEntry value="2">@Strings.color_blue_dark</listEntry>
 				<listEntry value="3">@Strings.color_green</listEntry>
@@ -85,7 +87,7 @@
 		</setting>
 		<setting propertyKey="@Properties.color_orientation_logo" title="@Strings.color_orientation_logo_title" prompt="@Strings.color_orientation_logo_title">
 			<settingConfig type="list" >
-				<listEntry value="0">@Strings.color_default</listEntry>
+				<listEntry value="0">@Strings.default_title</listEntry>
 				<listEntry value="1">@Strings.color_blue</listEntry>
 				<listEntry value="2">@Strings.color_blue_dark</listEntry>
 				<listEntry value="3">@Strings.color_green</listEntry>
@@ -101,7 +103,7 @@
 		</setting>
 		<setting propertyKey="@Properties.color_text_orientation" title="@Strings.color_text_orientation_title" prompt="@Strings.color_text_orientation_title">
 			<settingConfig type="list" >
-				<listEntry value="0">@Strings.color_default</listEntry>
+				<listEntry value="0">@Strings.default_title</listEntry>
 				<listEntry value="1">@Strings.color_blue</listEntry>
 				<listEntry value="2">@Strings.color_blue_dark</listEntry>
 				<listEntry value="3">@Strings.color_green</listEntry>
@@ -117,7 +119,7 @@
 		</setting>
 		<setting propertyKey="@Properties.color_text_distance" title="@Strings.color_text_distance_title" prompt="@Strings.color_text_distance_title">
 			<settingConfig type="list" >
-				<listEntry value="0">@Strings.color_default</listEntry>
+				<listEntry value="0">@Strings.default_title</listEntry>
 				<listEntry value="1">@Strings.color_blue</listEntry>
 				<listEntry value="2">@Strings.color_blue_dark</listEntry>
 				<listEntry value="3">@Strings.color_green</listEntry>
@@ -133,7 +135,7 @@
 		</setting>
 		<setting propertyKey="@Properties.position_text_one" title="@Strings.position_text_one_title" prompt="@Strings.position_text_one_title">
 			<settingConfig type="list" >
-				<listEntry value="0">@Strings.position_default</listEntry>
+				<listEntry value="0">@Strings.default_title</listEntry>
 				<listEntry value="1">@Strings.position_top</listEntry>
 				<listEntry value="2">@Strings.position_center</listEntry>
 				<listEntry value="3">@Strings.position_bottom</listEntry>
@@ -148,6 +150,26 @@
 				<listEntry value="3">@Strings.gps_usable</listEntry>
 				<listEntry value="4">@Strings.gps_good</listEntry>
 			</settingConfig>
-		</setting>			
+		</setting>
+		<setting propertyKey="@Properties.orientation_size" title="@Strings.orientation_size_title" prompt="@Strings.orientation_size_title">
+			<settingConfig type="list" >
+				<listEntry value="0">@Strings.default_title</listEntry>
+				<listEntry value="1">@Strings.very_small</listEntry>
+				<listEntry value="2">@Strings.small</listEntry>
+				<listEntry value="3">@Strings.normal</listEntry>
+				<listEntry value="4">@Strings.high</listEntry>
+				<listEntry value="5">@Strings.very_high</listEntry>
+			</settingConfig>
+		</setting>	
+		<setting propertyKey="@Properties.distance_size" title="@Strings.distance_size_title" prompt="@Strings.distance_size_title">
+			<settingConfig type="list" >
+				<listEntry value="0">@Strings.default_title</listEntry>
+				<listEntry value="1">@Strings.very_small</listEntry>
+				<listEntry value="2">@Strings.small</listEntry>
+				<listEntry value="3">@Strings.normal</listEntry>
+				<listEntry value="4">@Strings.high</listEntry>
+				<listEntry value="5">@Strings.very_high</listEntry>
+			</settingConfig>
+		</setting>				
 	</settings>
 </resources>
