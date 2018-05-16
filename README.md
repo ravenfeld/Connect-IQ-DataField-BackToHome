@@ -1,7 +1,7 @@
 # MIGRATED  
-https://gitlab.com/ravenfeld/Connect-IQ-DataField-BackToHome
+https://gitlab.com/ravenfeld/Connect-IQ-DataField-BackHome
 
-# Connect-IQ-DataField-BackToHome
+# Connect-IQ-DataField-BackHome
 Datafield for back to home
 
 Indicates the distance and direction to be taken from the starting point of your activity or intermediate point according to your configuration
